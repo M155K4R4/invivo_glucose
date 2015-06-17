@@ -1,5 +1,30 @@
+=====================================================================================================================
+main.py
+- The main function with a commented structure to make this easy to understand
+- While each function is clearly commented, this one is outlined to make the process of
+   gathering and calculating data easily readable
+
+=====================================================================================================================
 pfile.py
 - Creates empty data sets to store data from the lock-in
 - Does stuff with child handles. Unsure of for what purpose
 - sets the range: total number of data points taken
 - wave: creates an array with values between 1020 and 1220 for frequencies with (range + 1) between them, inclusive
+
+=====================================================================================================================
+LaserPlusLIF.py
+- The main function. In matlab, this is the file that would be executed
+- A main function is required to run the LaserPlusLIF function
+- Eventually, every single function will be put into a single, fully commented file rather than having these
+    all spread out like so
+
+=====================================================================================================================
+InitLaser.py: 
+- Initializes the laser
+- Documentation for this function is needed
+	
+=====================================================================================================================
+Zurich_asynch_SINGLE.py: 
+- To use, the ziDAQ library needs to be installed for Python: http://www.zhinst.com/blogs/schwizer/2011/05/controlling-the-hf2-li-lock-in-with-python/
+- Creates the data structure to store data from lock-in
+- Reads the lock-in amplifier

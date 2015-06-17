@@ -121,20 +121,18 @@ def run_example(device, devtype, options, recording_time, obj): #{
 	'''
 
 	daq.set(t1_sigOutIn_setting)#;
-	# wait 1s to get a settled lowpass filter
+	# Wait 1s to get a settled lowpass filter
 	time.sleep(1)#;
-	#clean queue
+	# Clean queue
 	daq.flush()#;
-	# Pause to get a settled lowpass filter - this was included in the MatLab code and it doesn't hurt for here
-	time.sleep(10*tc)#;
+	
+	# Subscribe to scope
+	
 
 
 
 
-
-
-# # % Create a recorder thread
-# # % The function call will return a handle to that recorder (thread)
+	# Create a recorder thread; The function call will return a handle to that recorder (thread)
 # # h = ziDAQ('record', 1, int64(10000));
 # # % Subscribe nodes to be recorded
 # # % Set trigger parameter
@@ -144,7 +142,7 @@ def run_example(device, devtype, options, recording_time, obj): #{
 # # ziDAQ('set', h, 'trigger/0/duration', 0.5);
 # # ziDAQ('set', h, 'trigger/0/path', ['/' device '/demods/' demod_c '/sample'] )
 # # %ziDAQ('set', h, 'trigger/0/path', ['/' device '/demods/' demod_d '/sample'] )
-# # % Subscribe all nodes that should be recorded
+#Subscribe all nodes that should be recorded
 # # ziDAQ('subscribe', h, ['/' device '/demods/' demod_c '/sample']);
 # # %ziDAQ('subscribe', h, ['/' device '/demods/' demod_d '/sample']);
 

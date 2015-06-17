@@ -1,10 +1,10 @@
-# =====================================================================================================================
-# Kathryn DiPippo
-# 6/15/2015
-# InitLaser.py: 
-# - Initializes the laser
-# - Documentation for this function is needed
-# =====================================================================================================================
+'''
+Kathryn DiPippo
+6/15/2015
+InitLaser.py: 
+- Initializes the laser
+- Documentation for this function is needed
+'''
 
 def InitLaser(): #{					function [obj] = InitLaser()
 	#Find a GPIB object (Laser Tuner).
