@@ -1,13 +1,13 @@
-# =====================================================================================================================
-# Kathryn DiPippo
-# 6/15/2015
-# Pfile.py: 
-# - Creates empty data sets to store data from the lock-in
-# - Does stuff with child handles. Unsure of for what purpose
-# - sets the range: total number of data points taken
-# - wave: creates an array with values between 1020 and 1220 for frequencies with (range + 1) between them, inclusive
-# - This is for 150k samples/sec
-# =====================================================================================================================
+"""
+Kathryn DiPippo
+6/15/2015
+Pfile.py:
+- Creates empty data sets to store data from the lock-in
+- Does stuff with child handles. Unsure of for what purpose
+- sets the range: total number of data points taken
+- wave: creates an array with values between 1020 and 1220 for frequencies with (range + 1) between them, inclusive
+- This is for 150k samples/sec
+"""
 
 
 def pfile():

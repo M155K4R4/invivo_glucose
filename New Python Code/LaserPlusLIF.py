@@ -1,20 +1,18 @@
-# =====================================================================================================================
-# Kathryn DiPippo
-# 6/15/2015
-# LaserPlusLIF.py
-# - The main function. In matlab, this is the file that would be executed
-# - A main function is required to run the LaserPlusLIF function
-# - Eventually, every single function will be put into a single, fully commented file rather than having these
-#     all spread out like so
-# =====================================================================================================================
+"""
+Kathryn DiPippo
+6/15/2015
+LaserPlusLIF.py
+- The main function. In matlab, this is the file that would be executed
+- A main function is required to run the LaserPlusLIF function
+- Eventually, every single function will be put into a single, fully commented file rather than having these
+    all spread out like so
+"""
 
 def LaserPlusLIF(name, conc, total_runs, final_num_of_runs): #{		LIF2 features another variable num1
 	name = strcat('A',name)#;	why does an A need to be appended?
 	concentration = conc#;		what....form is concentration submitted as? why is this an array?
 	run = 1#;
 	spect = 1#;
-	%%%%%
-	num1
 
 	while (run <= total_runs): #{
 		# # %set(handles.run_num,'String',num2str(run));
