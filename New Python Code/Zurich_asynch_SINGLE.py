@@ -35,11 +35,19 @@ def Zurich_asynch_SINGLE(a): #{
 	#the length of time we'll record data (asynchronously) for
 	recording_time = 7.0#;			Unit for this is in seconds
 	# # obj1=obj;					Not sure where this came from
-	[data] = run_example(device, devtype, options, recording_time, obj1);
+	#[data] = run_example(device, devtype, options, recording_time, obj1);
+	run_example(device, 1, 1
 #}
 
 # ---------------------------------------------------------------------------------------------------------------------
-def run_example(device, devtype, options, recording_time, obj): #{
+def run_example(daq, device, channel, frequency): #{
+#def run_example(device, devtype, options, recording_time, obj): #{
+	# Example variables
+	c = str(channel-1)#;		it seems like this should be '0'
+	amplitude = 1#;
+	rate = 200#;
+	
+	
 	demod_c = '0'#;		demod channel
 	out_c = '0'#;		signal output channel
 	in_c = '0'#;		signal input channel
@@ -132,7 +140,7 @@ def run_example(device, devtype, options, recording_time, obj): #{
 
 
 
-	# Create a recorder thread; The function call will return a handle to that recorder (thread)
+# Create a recorder thread; The function call will return a handle to that recorder (thread)
 # # h = ziDAQ('record', 1, int64(10000));
 # # % Subscribe nodes to be recorded
 # # % Set trigger parameter

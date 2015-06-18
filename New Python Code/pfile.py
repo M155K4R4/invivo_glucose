@@ -7,12 +7,22 @@ Pfile.py:
 - sets the range: total number of data points taken
 - wave: creates an array with values between 1020 and 1220 for frequencies with (range + 1) between them, inclusive
 - This is for 150k samples/sec
+
+IMPORTANT NOTE
+so the function of this code was that this was a separate function Sabbir made that took data points plotted by
+Zurich_asynch_single.mat and then stored them in a new thing.
+
+The challenge will then be to take this and be able to not only convert it to python but to also have it work simultaneously
+with the Zurich_asynch_single code. That way, it stores data as it's plotting it.
 """
+
+
 
 
 def pfile():
 #function [Ydat,Ydat2,wave] = pfile1()
 
+	#child_handles retrieves data stored in the plot created by Zurich_asynch_single
 	child_handles = get(gca,'children')#;
 	num_child = size(child_handles,1)#;
 	choice = num_child#;
