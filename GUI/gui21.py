@@ -1,9 +1,31 @@
 import Tkinter
+import tkMessageBox
+from Tkinter import *
+
+def doNothing(): #{
+	print("ok ok I won't...")
+#}
 
 def gui(): #{
 	getFld = Tkinter.IntVar()
 	
 	form.wm_title('CLINICAL')
+	
+	mb = Menubutton( form, text="File", relief=RAISED)
+	mb.grid()
+	mb.menu = Menu(mb, tearoff=0)
+	mb["menu"] = mb.menu
+	
+	subMenu = Menu(mb)
+	subMenu.add_cascade(label="File", menu=subMenu)
+	subMenu.add_command(label="New Project...", command=doNothing)
+	subMenu.add_command(label="New...", command=doNothing)
+	subMenu.add_separator()
+	subMenu.add_command(label="Exit", command=doNothing)
+	
+	editMenu = Menu(mb)
+	menu.add_cascade(label="Edit", menu=editMenu)
+	editMenu.add_command(label="Redo", command=doNothing)
 	
 	#---------------
 	stepZero = Tkinter.LabelFrame(form, text=" 1. Store Data: ")
@@ -98,7 +120,7 @@ def gui(): #{
 	stepTwo = Tkinter.LabelFrame(form, text=" 3. Run: ")
 	stepTwo.grid(row=2, columnspan=7, sticky='WE', padx=5, pady=5, ipadx=5, ipady=5)
 	
-	inFileBtn = Tkinter.Button(stepTwo, text="          BEGIN SENSING          ")
+	inFileBtn = Tkinter.Button(stepTwo, text="          BEGIN SENSING          ", command=doNothing)
 	inFileBtn.grid(row=7, sticky='WE', padx=5, pady=2)
 	
 	#outTblLbl = Tkinter.Label(stepTwo, text="Enter the name of the table to be used in the statements:")
