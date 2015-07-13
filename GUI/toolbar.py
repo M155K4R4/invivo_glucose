@@ -65,11 +65,11 @@ def doNothing(): #{
 def Zurich_asynch_SINGLE(): #{
 	# ---- Taking data
 	# ---- Display dummy loading bar
-	win = Toplevel()
+	win = Toplevel(bg = "white")
 	textoBar = Label(win, text="Taking data, please, wait 10 seconds", font=(font_type, size_variable), bg="white")
 	textoBar.grid(row=0, column=0, pady=(5,5))
-	myvar3=Tkinter.Label(win,image = tkimage)
-	myvar3.place(x=0, y=0, relwidth=1, relheight=1)
+	#myvar3=Tkinter.Label(win,image = tkimage)
+	#myvar3.place(x=0, y=0, relwidth=1, relheight=1)
 	progressbar = ttk.Progressbar(win, orient = HORIZONTAL, mode = 'indeterminate',length=250)
 	progressbar.grid(row=1, column=0, pady=(5,5))
 	progressbar.start()
@@ -78,11 +78,11 @@ def Zurich_asynch_SINGLE(): #{
 
 
 def handle_click():
-	win = Toplevel()
+	win = Toplevel(bg = "white")
 	textoBar = Label(win, text="Taking data, please, wait 10 seconds", font=(font_type, size_variable), bg="white")
 	textoBar.grid(row=0, column=0, pady=(5,5))
-	myvar3=Tkinter.Label(win,image = tkimage)
-	myvar3.place(x=0, y=0, relwidth=1, relheight=1)
+	#myvar3=Tkinter.Label(win,image = tkimage)
+	#myvar3.place(x=0, y=0, relwidth=1, relheight=1)
 	progressbar = ttk.Progressbar(win, orient = HORIZONTAL, mode = 'indeterminate',length=250)
 	progressbar.grid(row=1, column=0, pady=(5,5))
 	progressbar.start()
@@ -100,18 +100,9 @@ tkimage = ImageTk.PhotoImage(im)
 myvar=Tkinter.Label(root,image = tkimage)
 myvar.place(x=0, y=0, relwidth=1, relheight=1)
 
-
-#image = Image.open("tankmaids.jpg")
-# backgroundImage = ImageTk.PhotoImage(file = "C:\Users\Kathryn\Desktop\MIRTHE-2015-Glucose-Sensor\GUI\tankmaids.gif")
-# root.create_image(10,10, image = image, anchor = NW)
-# #background_photo = ImageTk.PhotoImage(image)
-# background_label = tk.Label(root, image=backgroundImage)
-# background_label.place(x=0, y=0, relwidth=1, relheight=1)
-
-
 menu = Menu(root)
 root.config(menu=menu)
-
+ 
 subMenu = Menu(menu)
 menu.add_cascade(label="File", menu=subMenu, font=(font_type, size_variable))
 subMenu.add_command(label="Create New Project...", command=create_folder, font=(font_type, header_size_variable))
@@ -122,17 +113,6 @@ subMenu.add_command(label="Exit", font=(font_type, header_size_variable), comman
 editMenu = Menu(menu)
 menu.add_cascade(label="Edit", font=(font_type, size_variable), menu=editMenu)
 editMenu.add_command(label="Switch to SOLUTIONS View (Not functional at the moment)", font=(font_type, header_size_variable), command=doNothing)
-
-#-------------
-#toolbar = Frame(root, bg="blue")
-
-#insertButt = Button(toolbar, text="Run Sim Bar", command=handle_click)
-#insertButt.grid(row=2, sticky="W", padx=2, pady=2)
-#printButt = Button(toolbar, text="Print", command=handle_click)
-#printButt.grid(row=2, column=1, sticky="W", padx=2, pady=2)
-#runButt = Button(toolbar, text="      RUN      ", command=Zurich_asynch_SINGLE)
-#runButt.grid(row=2, column=2, sticky="W", padx=2, pady=2)
-#toolbar.grid(sticky="N")
 
 
 #---------------
@@ -153,12 +133,6 @@ inFileBtn.grid(row=0, column=5)
 stepOne = Tkinter.LabelFrame(root, text=" 2. Basic Information: ", font=(font_type, title_size_variable, "bold"), bg="white")
 stepOne.grid(row=1, columnspan=10, sticky='WE', padx=5, pady=5, ipadx=5, ipady=5)
 stepOne.columnconfigure(0, weight=1)
-
-#helpLf = Tkinter.LabelFrame(root, text=" Description ")
-#helpLf.grid(row=0, column=9, columnspan=2, rowspan=8, sticky='NS', padx=5, pady=5)
-
-#helpLbl = Tkinter.Label(helpLf,text="If we want to put help text here, we could go and do that. IDK what to put here for now")
-#helpLbl.grid(row=0)
 
 # Name --------
 nameLbl = Tkinter.Label(stepOne, text="Name:", font=(font_type, size_variable), fg = fg_color, bg="white")
