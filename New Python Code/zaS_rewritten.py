@@ -30,8 +30,8 @@ def main(): #{
 	date = 062415
 	outlier_removal_flag = 0	# 0 if data wishes to be left as is
 								# 1 if data will be reduced to num_of_final_runs
-	total_initial_runs = 10
-	num_of_final_runs = 5		# this value will not matter if orf above is 0
+	total_initial_runs = 1
+	num_of_final_runs = 1		# this value will not matter if orf above is 0
 	plot_flag = 0			# variable that determines if a plot will be generated
 	
 	#-----------------------------------
@@ -57,6 +57,7 @@ def Zurich_asynch_SINGLE(filename_array, plot_flag): #{
 	device = zhinst.utils.autoDetect(daq, exclude=None)
 	for i in range(0, len(filename_array)): #{
 		measureSynchronousFeedback(daq, device, 1, 1e5, filename_array[i], plot_flag)
+		print("Finished " + filename_array[i])
 	#}
 #}
 
@@ -65,9 +66,12 @@ def measureSynchronousFeedback(daq, device, channel, frequency, filename, plot_f
 	# filename in this case is the name stored in filename_array at the specified value from
 	#    the for loop in Zurich_asynch_SINGLE
 	c=str(channel-1)
+	d=str(channel-1+6)
+        # c+6
 	amplitude=1
 	rate=200
 	tc=0.01
+	
 	# Disable all outputs and all demods
 	general_setting = [
 		[['/', device, '/demods/0/trigger'], 0],
@@ -79,9 +83,8 @@ def measureSynchronousFeedback(daq, device, channel, frequency, filename, plot_f
 		[['/', device, '/sigouts/0/enables/*'], 0],
 		[['/', device, '/sigouts/1/enables/*'], 0]
 	]
-	print('HI')
 	daq.set(general_setting)
-	print('HELLO')
+	
 	# Set test settings
 	t1_sigOutIn_setting = [
 		[['/', device, '/sigins/',c,'/diff'], 0],
@@ -97,13 +100,11 @@ def measureSynchronousFeedback(daq, device, channel, frequency, filename, plot_f
 		[['/', device, '/oscs/',c,'/freq'], frequency],
 		[['/', device, '/sigouts/',c,'/add'], 0],
 		[['/', device, '/sigouts/',c,'/on'], 1],
-		[['/', device, '/sigouts/',c,'/enables/',c], 1],
+		[['/', device, '/sigouts/',c,'/enables/',d], 1],
 		[['/', device, '/sigouts/',c,'/range'], 1],
-		[['/', device, '/sigouts/',c,'/amplitudes/',c], amplitude],
+		[['/', device, '/sigouts/',c,'/amplitudes/',d], amplitude],
 	]
-	print('does this work?')
 	daq.set(t1_sigOutIn_setting);
-	print('yep')
 	# wait 1s to get a settled lowpass filter
 	time.sleep(1)
 	#clean queue
@@ -120,34 +121,44 @@ def measureSynchronousFeedback(daq, device, channel, frequency, filename, plot_f
 	
 	#-----------------------------------
 	# Save the data as a .txt file
-	data = dataDict[device]['demods'][c]['sample'][0]
-	#data['x'] and data['y'] are two arrays to access data from
 	text_file = open(filename, "w")
 	
-	for i in range (0,len(data['x'])):
-		text_file.write(str(data['x'][i]) + ',' + str(data['y'][i]) + '\n')
-	text_file.close()
-	#-----------------------------------
+	data_pathway = '/' + device + '/demods/' + c + '/sample'
+	daq.subscribe(data_pathway)
+	flat_dictionary_key = False
+	data = daq.poll(0.1, 200, 1, flat_dictionary_key)
+	continue_variable = 1
 	
-	# Recreate data
-	if plot_flag == 1: # if plot_flag is enabled
-		if device in dataDict:
-			if dataDict[device]['demods'][c]['sample'][0]['time']['dataloss']:
-				print 'Sample loss detected.'
-			else:
-				e=0.5*amplitude/sqrt(2)
-				data = dataDict[device]['demods'][c]['sample'][0]
-				rdata = sqrt(data['x']**2+data['y']**2)
-				print 'Measured rms amplitude is %.5fV (expected: %.5fV).' %(mean(rdata),e)
-				tdata= (data['timestamp']-data['timestamp'][0])/210e6
-				plt.figure(channel)
-				plt.grid(True)
-				plt.plot(tdata,rdata)
-				plt.title('Demodulator data')
-				plt.xlabel('Time (s)')
-				plt.ylabel(' R component (V)')
-				plt.axis([tdata[0],tdata[-1],0.97*e,1.03*e])
-				plt.show()
+	x = data[device]['demods'][c]['sample']['x']
+	y = data[device]['demods'][c]['sample']['y']
+	timestamps = data[device]['demods'][c]['sample']['timestamp']
+	distance_data = sqrt((x**2)+(y**2))
+	ts_data = ((timestamps - timestamps[0])/210e6)
+	for i in range(0, len(distance_data)): #{
+		# the data will be stored as (sqrt(x^2 + y^2), time)
+		text_file.write(str(distance_data[i]) + ',' + str(ts_data[i]) + '\n')
+	#}
+	text_file.close()
+	
+	#-----------------------------------
+	# Recreate data as a plot
+	if plot_flag == 1: # if plot_flag is enabled {
+		e=0.5*amplitude/sqrt(2)
+		x_data = dataDict[device]['demods'][c]['sample']['x']
+		y_data = dataDict[device]['demods'][c]['sample']['y']
+		timestamp_data = dataDict[device]['demods'][c]['sample']['timestamp']
+		rdata = sqrt(x_data**2+y_data**2)
+		print 'Measured rms amplitude is %.5fV (expected: %.5fV).' %(mean(rdata),e)
+		tdata= (timestamp_data - timestamp_data[0])/210e6
+		plt.figure(channel)
+		plt.grid(True)
+		plt.plot(tdata,rdata)
+		plt.title('Demodulator data')
+		plt.xlabel('Time (s)')
+		plt.ylabel(' R component (V)')
+		plt.axis([tdata[0],tdata[-1],0.97*e,1.03*e])
+		plt.show()
+	#}
 #}
 
 # ---------------------------------------------------------------------------------------------------------------------
