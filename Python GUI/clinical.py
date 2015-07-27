@@ -260,7 +260,6 @@ def handle_click():
 	
 # =====================================================================================================================
 def CLINICAL_GUI(): #{
-	root = Tk()
 	root.wm_title('CLINICAL')
 	w, h = root.winfo_screenwidth(), root.winfo_screenheight()
 	root.overrideredirect(1)
@@ -365,5 +364,6 @@ def CLINICAL_GUI(): #{
 # =====================================================================================================================
 # MAIN FUNCTION
 if __name__ == '__main__': #{
+	root = Tk()
 	CLINICAL_GUI()
 #}

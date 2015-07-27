@@ -99,7 +99,7 @@ def handle_click():
 	
 # =====================================================================================================================
 def SOLUTIONS_GUI(): #{
-	root = Tk()
+	#root = Tk()
 	root.wm_title('CLINICAL')
 	w, h = root.winfo_screenwidth(), root.winfo_screenheight()
 	root.overrideredirect(1)
@@ -225,5 +225,6 @@ def SOLUTIONS_GUI(): #{
 # =====================================================================================================================
 # MAIN FUNCTION
 if __name__ == '__main__': #{
+	root = Tk()
 	SOLUTIONS_GUI()
 #}
