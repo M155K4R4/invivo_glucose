@@ -159,9 +159,10 @@ def create_folder(): #{
 def load_directory(): #{
 	dirname = tkFileDialog.askdirectory(parent=root,initialdir="/",title='Please select a directory')
 	if len(dirname) > 0:
-		dirname_variable = dirname
-		UPDATE_VARIABLE = 1
-		print "You chose %s" % dirname		#Uncomment to click directory of location
+		return dirname
+		#dirname_variable = dirname
+		#UPDATE_VARIABLE = 1
+		#print "You chose %s" % dirname		#Uncomment to click directory of location
 #}
 
 # ---------------------------------------------------------------------------------------------------------------------
@@ -306,14 +307,14 @@ def CLINICAL_GUI(): #{
 	 
 	subMenu = Menu(menu)
 	menu.add_cascade(label="File", menu=subMenu, font=(font_type, size_variable))
-	subMenu.add_command(label="Create New Project...", command=create_folder, font=(font_type, header_size_variable))
-	subMenu.add_separator()
+	#subMenu.add_command(label="Create New Project...", command=create_folder, font=(font_type, header_size_variable))
+	#subMenu.add_separator()
 	subMenu.add_command(label="Exit", font=(font_type, header_size_variable), command=root.destroy)
 
 	editMenu = Menu(menu)
 	menu.add_cascade(label="Edit", font=(font_type, size_variable), menu=editMenu)
-	editMenu.add_command(label="Switch to SOLUTIONS View (Not functional at the moment)", font=(font_type, header_size_variable), command=doNothing)
-	editMenu.add_separator()
+	#editMenu.add_command(label="Switch to SOLUTIONS View (Not functional at the moment)", font=(font_type, header_size_variable), command=doNothing)
+	#editMenu.add_separator()
 	editMenu.add_command(label="README for Setting Up Integrating Sphere", font=(font_type, header_size_variable), command=startupFunction)
 	editMenu.add_command(label="README for MatLab calculations", font=(font_type, header_size_variable), command=michelleFunction)
 
@@ -326,13 +327,16 @@ def CLINICAL_GUI(): #{
 	inFileLbl.grid(row=0, column=0, columnspan=2, sticky='E')
 	inFileTxt = Tkinter.Entry(stepZero, font=(font_type, size_variable))
 	inFileTxt.grid(row=0, column=3, columnspan=2, padx=5, pady=2)
-	inFileBtn = Tkinter.Button(stepZero, text="Browse ...", font=(font_type, size_variable), bg="white", command=load_directory)
-	inFileBtn.grid(row=0, column=5, padx = 10)
-
-	if (UPDATE_VARIABLE == 1): #{
-		inFileTxt.delete(0, END)
-		inFileTxt.insert(0, dirname)
-		UPDATE_VARIABLE = 0
+	inFileTxt.delete(0, END)
+	inFileTxt.insert(0, load_directory())
+	
+	#inFileBtn = Tkinter.Button(stepZero, text="Browse ...", font=(font_type, size_variable), bg="white", command=load_directory)
+	#inFileBtn.grid(row=0, column=5, padx = 10)
+	
+	#if (UPDATE_VARIABLE == 1): #{
+	#	inFileTxt.delete(0, END)
+	#	inFileTxt.insert(0, dirname)
+	#	UPDATE_VARIABLE = 0
 	#}
 	
 	# ---------------------------------------------------------------------------------------------------------------------
