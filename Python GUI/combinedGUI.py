@@ -49,7 +49,7 @@ def create_folder(): #{
 #}
 
 # ---------------------------------------------------------------------------------------------------------------------
-def load_directory(window_name): #{
+def load_directory(inFileTxt, window_name): #{
 	dirname = tkFileDialog.askdirectory(parent=window_name,initialdir="/",title='Please select a directory')
 	if len(dirname ) > 0:
 		inFileTxt.delete(0, END)
@@ -317,7 +317,7 @@ def SOLUTIONS_GUI(): #{
 
 # =====================================================================================================================
 def main_gui(): #{
-	main_root = Tk()
+	#main_root = Tk()
 	main_root.wm_title('GLUCOSE SENSING SYSTEM')
 	w, h = main_root.winfo_screenwidth(), main_root.winfo_screenheight()
 	main_root.overrideredirect(1)
@@ -347,5 +347,6 @@ def main_gui(): #{
 # =====================================================================================================================
 # MAIN FUNCTION
 if __name__ == '__main__': #{
+	main_root = Tk()
 	main_gui()
 #}
